@@ -18,6 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'search/', include('haystack.urls')),
-    path(r'', include('search.urls')),
+    path('', include('search.urls')),
 ]

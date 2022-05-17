@@ -4,8 +4,12 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('Hello world!')
+    return render(request, 'search/index.html')
 
 
 def search(request):
-    return render('search/search.html')
+    return render(request, 'search/result.html')
+
+
+def detail(request):
+    return render(request, 'search/detail.html')

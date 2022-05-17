@@ -38,20 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'haystack',
     'search',
 ]
-
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
-    }
-}
-
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
