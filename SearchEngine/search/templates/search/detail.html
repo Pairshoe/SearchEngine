@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="icon" href="../../static/search/images/favicon.png">
     <!-- Site Title -->
-    <title>Glass UI - Glassmorphism UI Kit</title>
+    <title>WikiLaw</title>
     <!-- Bootstrap 5 Core CSS -->
     <link href="../../static/search/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Styles -->
@@ -30,6 +30,37 @@
     </div>
 
     <div class="main-container">
+        <div class="relative" style="margin-bottom: 5%">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent absolute top-0 left-0 right-0">
+                <div class="container">
+                    <a class="navbar-brand" href="/"><img src="../../static/search/images/logo4.png" alt=""></a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-7" aria-controls="navbar-7" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                        <span class="sr-only">Toggle navigation</span>
+                    </button><!-- / navbar-toggler -->
+
+                    <div class="collapse navbar-collapse" id="navbar-7">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="headers.html#x"><span><i class="fas fa-home mr-5"></i> Home</span></a>
+                            </li><!-- / nav-item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="headers.html#x"><span><i class="fas fa-user mr-5"></i> About</span></a>
+                            </li><!-- / nav-item -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="headers.html#x"><span><i class="fas fa-pencil-ruler mr-5"></i> Services</span></a>
+                            </li><!-- / nav-item -->
+                            <li class="nav-item">
+                                <a class="nav-link last-menu-item" href="headers.html#x"><span><i class="fas fa-th-large mr-5"></i> Portfolio</span></a>
+                            </li><!-- / nav-item -->
+                        </ul><!-- / navbar-nav -->
+                    </div><!-- / navbar-collapse -->
+                </div><!-- / container -->
+            </nav><!-- / navbar -->
+        </div><!-- / relative -->
+
         <section id="base">
             <div class="container">
                 <div class="promo-box" data-aos="fade-up">
@@ -87,121 +118,21 @@
     </script>
     <!-- / aos -->
 
-    <!-- Toasts -->
-    <script>
-      document.getElementById("toastbtn-br").onclick = function() {
-        var myAlert =document.getElementById('toastOne');//select id of toast
-          var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
-          bsAlert.show();//show it
-      };
-    </script>
-    <div class="position-fixed bottom-15 right-15" style="z-index: 999999">
-        <div id="toastOne" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <p class="circle p-5 me-2 mb-0 bg-primary"></p>
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><!-- / toast-header -->
-            <div class="toast-body">
-                <p class="mb-0">Hello, world! This is a toast message.</p>
-            </div><!-- / toast-body -->
-        </div><!-- / toast -->
-    </div><!-- / position-fixed -->
-    <!-- / toastOne -->
-
-    <script>
-      document.getElementById("toastbtn-tr").onclick = function() {
-        var myAlert =document.getElementById('toastTwo');//select id of toast
-          var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
-          bsAlert.show();//show it
-      };
-    </script>
-    <div class="position-fixed top-15 right-15" style="z-index: 999999">
-        <div id="toastTwo" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <p class="circle p-5 me-2 mb-0 bg-success"></p>
-                <strong class="me-auto">Success</strong>
-                <small>Just Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><!-- / toast-header -->
-            <div class="toast-body">
-                <p class="mb-0">Congrats. You successfully read this message on a toast.</p>
-            </div><!-- / toast-body -->
-        </div><!-- / toast -->
-    </div><!-- / position-fixed -->
-    <!-- / toastTwo -->
-
-    <script>
-      document.getElementById("toastbtn-bl").onclick = function() {
-        var myAlert =document.getElementById('toastThree');//select id of toast
-          var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
-          bsAlert.show();//show it
-      };
-    </script>
-    <div class="position-fixed bottom-15 left-15" style="z-index: 999999">
-        <div id="toastThree" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <p class="circle p-5 me-2 mb-0 bg-warning"></p>
-                <strong class="me-auto">Warning</strong>
-                <small>23 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><!-- / toast-header -->
-            <div class="toast-body">
-                <p class="mb-0">Warning! Better check yourself.</p>
-            </div><!-- / toast-body -->
-        </div><!-- / toast -->
-    </div><!-- / position-fixed -->
-    <!-- / toastThree -->
-
-    <script>
-      document.getElementById("toastbtn-tl").onclick = function() {
-        var myAlert =document.getElementById('toastFour');//select id of toast
-          var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
-          bsAlert.show();//show it
-      };
-    </script>
-    <div class="position-fixed top-15 left-15" style="z-index: 999999">
-        <div id="toastFour" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <p class="circle p-5 me-2 mb-0 bg-info"></p>
-                <strong class="me-auto">Info</strong>
-                <small>47 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><!-- / toast-header -->
-            <div class="toast-body">
-                <p class="mb-0">Heads up! This alert needs your attention.</p>
-            </div><!-- / toast-body -->
-        </div><!-- / toast -->
-    </div><!-- / position-fixed -->
-    <!-- / toastFour -->
-
-    <script>
-      document.getElementById("toastbtn-notify").onclick = function() {
-        var myAlert =document.getElementById('toastNotify');//select id of toast
-          var bsAlert = new bootstrap.Toast(myAlert);//inizialize it
-          bsAlert.show();//show it
-      };
-    </script>
-    <div class="position-fixed bottom-15 right-15" style="z-index: 999999">
-        <div id="toastNotify" class="toast notification hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-body">
-                <ul class="list-unstyled list-media mb-0 notification-content">
-                    <li class="list-group-item bg-transparent p-0 mb-0 b-0">
-                        <div class="list-media-content list-media-primary">
-                            <i class="fas fa-envelope"></i>
-                        </div><!-- / list-media-content -->
-                        <div class="info">
-                            <span class="title fs-18 fw-bold text-primary mb-0">New Message</span>
-                            <span class="sub-title fs-10 fw-bold text-secondary mb-0">From: johndoe@gmail.com</span>
-                        </div><!-- / info -->
-                    </li><!-- / list-group-item -->
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><!-- / toast-body -->
-        </div><!-- / toast -->
-    </div><!-- / position-fixed -->
-    <!-- / toastNotify -->
-    <!-- / Toasts -->
+    <footer class="bg-white">
+        <div class="container">
+            <div class="row v-center mobile-center">
+                <div class="col-md-4 footer-left-area tablet-top">
+                    <p>© 2022 WikiLaw by Firman Luo & Victor Wang</a></p>
+                </div><!-- / footer-left-area -->
+               <div class="col-md-8 footer-right-area">
+                    <p class="footer-social">
+                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-facebook-f"></i></a>
+                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-twitter"></i></a>
+                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary"><i class="fab fa-instagram"></i></a>
+                    </p><!-- / footer-social -->
+                </div><!-- / footer-right-area -->
+            </div><!-- / row -->
+        </div><!-- / container -->
+    </footer>
 </body>
 </html>
