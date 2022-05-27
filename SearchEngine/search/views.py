@@ -18,7 +18,7 @@ def search(request):
     template = loader.get_template('search/result.html')
     if request.method == 'GET':
         searchEngineCore.make_query(request.GET.get('query'))
-        results, recommands = searchEngineCore.search_case(0)
+        results = searchEngineCore.search_case(0)
         print(results[0])
         for result in results:
             result['highlight'] = ''.join(result['highlight'])

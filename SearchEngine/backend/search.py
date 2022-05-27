@@ -1,9 +1,8 @@
-import re
-import time
-
+import re, jieba
 from elasticsearch import Elasticsearch
 
-INDEX = 'test_cases'
+TEST = False
+INDEX = 'cases_test' if TEST == True else 'cases'
 
 
 class SearchEngineCore:
@@ -19,15 +18,22 @@ class SearchEngineCore:
     # accurate_mode ：精确模式，若开启该模式，将依照空格对搜索词进行分隔并分别精确匹配
     # conditions ：其他搜索条件，包括 condition_list 中列到的所有内容，注意 filing_time 和 browse_count 均为 int 类型，其余为 str
     # sort_key ：排序依据，置空即按照分数排序（默认），还可以选择 filing_time 或 browse_count
-    def make_query(self, content: str, accurate_mode: bool=False, conditions: dict=dict(), sort_key: str=''):
+    def make_query(self, content: str, accurate_mode: bool=False, case_mode: bool=False, conditions: dict=dict(), sort_key: str=''):
         assert(sort_key == '' or sort_key == 'filing_time' or sort_key == 'browse_count')
         self.query = {'bool': {'must': [], 'should': []}}
         self.sort = dict()
+        content = re.sub(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$', ' ', content)
         if accurate_mode == True:
             for word in content.split():
                 self.query['bool']['must'].append({'match_phrase': {'content': word}})
+        elif case_mode == True:
+            for word in jieba.cut(content, cut_all=True):
+                self.query['bool']['should'].append({'match_phrase': {'content': word}})
+            self.query['bool']['minimum_should_match'] = '60%'
         else:
-            self.query['bool']['should'].append({'match': {'content': {'query': content, 'minimum_should_match': '60%'}}})
+            for word in jieba.cut_for_search(content):
+                self.query['bool']['should'].append({'match_phrase': {'content': word}})
+            self.query['bool']['minimum_should_match'] = '85%'
 
         for condition in self.condition_list:
             if conditions.get(condition) is not None and conditions[condition] != '':
@@ -41,9 +47,8 @@ class SearchEngineCore:
             self.sort = {sort_key: {'order': 'desc'}}
         else:
             self.sort = None
-
         self.can_search = True
-    
+
     def parse_recommend_response(self, response):
         recommends = list()
         for term in response:
@@ -57,8 +62,7 @@ class SearchEngineCore:
     # page ：页号
     def search_case(self, page: int):
         assert(self.can_search == True)
-        recommend_str = ''
-        results, recommends = list(), list()
+        results = list()
 
         response = self.es.search(index=INDEX, from_=page*10, size=10, highlight={'fields': {'content': {}}}, query=self.query, sort=self.sort)
         for term in response['hits']['hits']:
@@ -67,12 +71,8 @@ class SearchEngineCore:
                 result[condition] = term['_source'][condition]
             result['highlight'] = term['highlight']['content']
             results.append(result)
-            recommend_str += (term['_source']['content'][:500] if len(term['_source']['content']) > 500 else term['_source']['content'])
 
-        recommend_response = self.es.search(index=INDEX, size=5, query={'match': {'content': recommend_str}})
-        recommends = self.parse_recommend_response(recommend_response['hits']['hits'])
-
-        return results, recommends
+        return results
 
     # id ：案件编号
     def get_case(self, id: str):
@@ -128,17 +128,7 @@ class SearchEngineCore:
 
 
 if __name__ == '__main__':
-    print('Start Query at %02d:%02d:%02d.' % (time.localtime().tm_hour, time.localtime().tm_min, time.localtime().tm_sec))
     core = SearchEngineCore()
-    core.make_query('财产损失', accurate_mode=True, sort_key='browse_count', conditions={'law_detailed': '最高人民法院'})
-    results, recommends = core.search_case(0)
-    # for result in results:
-    #     print(result)
-    print(results[0], recommends)
-    print(len(results))
-    print(core.get_case('2'))
-    # results = core.search_case(0)
-    # print(results[0])
-    # for result in results:
-    #     print(result)
-    print('Finish Query at %02d:%02d:%02d.' % (time.localtime().tm_hour, time.localtime().tm_min, time.localtime().tm_sec))
+    core.make_query('中华人民共和国刑法', accurate_mode=False)
+    print(core.search_case(0))
+    print(core.get_case(1))

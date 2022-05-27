@@ -1,10 +1,9 @@
-import os
-import re
-
+import os, re
 from bs4 import BeautifulSoup
 from elasticsearch import Elasticsearch
 
-INDEX = 'cases'
+TEST = False
+INDEX = 'cases_test' if TEST == True else 'cases'
 
 
 def parse(cont, key):
@@ -43,6 +42,8 @@ if __name__ == '__main__':
             'browse_count': {'type': 'integer', 'store': 'true'}
         }
     })
+
+    case_id_set = set()
     for _, _, files in os.walk('./raw_data/'):
         for i, file in enumerate(files):
             with open(os.path.join('./raw_data/', file)) as fp:
@@ -55,6 +56,11 @@ if __name__ == '__main__':
                 judge = parse_list(cont, '', '审判人员姓名')
                 court = parse(cont, '经办法院')
                 document_type = parse(cont, '文书名称')
+                if case_id in case_id_set:
+                    continue
+                else:
+                    case_id_set.add(case_id)
+
                 try:
                     content = cont.find(re.compile('.*'), {'namecn': '全文'}).attrs['ovalue'].strip()
                     response = es.create(index=INDEX, id=str(i + 1), document={
@@ -71,7 +77,8 @@ if __name__ == '__main__':
                     })
                 except AttributeError:
                     print(f'Case {i} has no content, skip.')
-            if (i + 1) % 100 == 0:
+
+            if (i + 1) % 1000 == 0:
                 print(f'Adding: {i + 1} / {len(files)}')
-            # if (i + 1) % 1000 == 0:
-            #     break
+            if TEST == True and (i + 1) == 1000:
+                break
