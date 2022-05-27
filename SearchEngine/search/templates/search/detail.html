@@ -108,36 +108,42 @@
                 <!-- similar judge -->
                 {% for recommend in recommends %}
                 <div class="col-md-6 col-lg-4 grid-item similar_content">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recommend.case_id }}</h5>
-                            <p class="card-text">{{ recommend.content_abstract }}</p>
-                        </div><!-- / card-body -->
-                    </div><!-- / card -->
+                    <a href="{%url 'detail' %}?id={{ recommend.id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recommend.case_id }}</h5>
+                                <p class="card-text">{{ recommend.content_abstract }}</p>
+                            </div><!-- / card-body -->
+                        </div><!-- / card -->
+                    </a>
                 </div><!-- / column -->
                 {% endfor %}
                 <!-- /  similar judge -->
                 <!-- similar judge -->
                 {% for recommend in recommends_judge %}
                 <div class="col-md-6 col-lg-4 grid-item similar_judge">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recommend.case_id }}</h5>
-                            <p class="card-text">{{ recommend.content_abstract }}</p>
-                        </div><!-- / card-body -->
-                    </div><!-- / card -->
+                    <a href="{%url 'detail' %}?id={{ recommend.id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recommend.case_id }}</h5>
+                                <p class="card-text">{{ recommend.content_abstract }}</p>
+                            </div><!-- / card-body -->
+                        </div><!-- / card -->
+                    </a>
                 </div><!-- / column -->
                 {% endfor %}
                 <!-- /  similar judge -->
                 <!-- similar law -->
                 {% for recommend in recommends_law %}
                 <div class="col-md-6 col-lg-4 grid-item similar_law">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ recommend.case_id }}</h5>
-                            <p class="card-text">{{ recommend.content_abstract }}</p>
-                        </div><!-- / card-body -->
-                    </div><!-- / card -->
+                    <a href="{%url 'detail' %}?id={{ recommend.id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recommend.case_id }}</h5>
+                                <p class="card-text">{{ recommend.content_abstract }}</p>
+                            </div><!-- / card-body -->
+                        </div><!-- / card -->
+                    </a>
                 </div><!-- / column -->
                 {% endfor %}
                 <!-- /  similar law -->
