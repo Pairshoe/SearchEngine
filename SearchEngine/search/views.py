@@ -43,7 +43,6 @@ def search(request):
 def detail(request):
     template = loader.get_template('search/detail.html')
     if request.method == 'GET':
-        print(request.GET.get('id'))
         results = searchEngineCore.get_case(request.GET.get('id'))
         print(results)
     return HttpResponse(template.render(results, request))

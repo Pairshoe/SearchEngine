@@ -55,9 +55,9 @@ python3 data_preprocess.py
        - body ：列表，内容
        - judge ：列表，法官
        - time ：判决日期
-       - secretaryn ：列表，书记员
+       - secretary ：列表，书记员
        - laws ：列表，与本案相关的法律
-    - recomments ：列表，内容相似案件，每项包含如下内容
+    - recommends ：列表，内容相似案件，每项包含如下内容
        - id ：案件在搜索引擎中的编号
        - case_id ：案号
        - filing_time ：立案年份， 0 表示无该项

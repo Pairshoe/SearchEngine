@@ -84,25 +84,66 @@
                         <p></p>
                         <p class="lead" style="text-align: end">{{ content.time }}</p>
                         <p></p>
-                        {% for name in content.secretaryn %}
+                        {% for name in content.secretary %}
                             <p class="lead" style="text-align: end">{{ name }}</p>
                         {% endfor %}
-                        <p>Regular Paragraph.</p>
-                        <p>
-                            <span class="fw-thin mr-5">.fw-thin</span>
-                            <span class="fw-light mr-5">.fw-light</span>
-                            <span class="fw-regular mr-5">.fw-regular</span>
-                            <span class="fw-medium mr-5">.fw-medium</span>
-                            <span class="fw-bold mr-5">.fw-bold</span>
-                            <span class="primary-font mr-5">.primary-font</span>
-                            <span class="secondary-font mr-5">.secondary-font</span>
-                        </p>
                         <!-- / paragraphs -->
                     </div><!-- / row -->
                 </div><!-- / promo-box -->
             </div>
         </section>
     </div>
+
+    <section class="lg bg-img" style="background-image: url(../../static/search/images/ph-bg5.jpg)">
+        <div class="container">
+            <div class="button-group filters-button-group mb-70">
+                <span class="fs-14 fw-medium title-color mr-20 mb-0">Recommends:</span>
+                <button class="btn filter-btn is-checked" data-filter="*">All</button>
+                <button class="btn filter-btn" data-filter=".similar_content">Similar Content</button>
+                <button class="btn filter-btn" data-filter=".similar_judge">Similar Judge</button>
+                <button class="btn filter-btn" data-filter=".similar_law">Similar Law</button>
+            </div><!-- /  filters-button-group -->
+
+            <div class="row grid" data-isotope='{ "layoutMode": "masonry" }'>
+                <!-- similar judge -->
+                {% for recommend in recommends %}
+                <div class="col-md-6 col-lg-4 grid-item similar_content">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recommend.case_id }}</h5>
+                            <p class="card-text">{{ recommend.content_abstract }}</p>
+                        </div><!-- / card-body -->
+                    </div><!-- / card -->
+                </div><!-- / column -->
+                {% endfor %}
+                <!-- /  similar judge -->
+                <!-- similar judge -->
+                {% for recommend in recommends_judge %}
+                <div class="col-md-6 col-lg-4 grid-item similar_judge">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recommend.case_id }}</h5>
+                            <p class="card-text">{{ recommend.content_abstract }}</p>
+                        </div><!-- / card-body -->
+                    </div><!-- / card -->
+                </div><!-- / column -->
+                {% endfor %}
+                <!-- /  similar judge -->
+                <!-- similar law -->
+                {% for recommend in recommends_law %}
+                <div class="col-md-6 col-lg-4 grid-item similar_law">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recommend.case_id }}</h5>
+                            <p class="card-text">{{ recommend.content_abstract }}</p>
+                        </div><!-- / card-body -->
+                    </div><!-- / card -->
+                </div><!-- / column -->
+                {% endfor %}
+                <!-- /  similar law -->
+            </div><!-- / row -->
+        </div><!-- / container -->
+    </section>
 
     <!-- Core JavaScript -->
     <script src="../../static/search/js/bootstrap.bundle.min.js"></script>
@@ -117,6 +158,11 @@
         })
     </script>
     <!-- / aos -->
+
+    <!-- Isotope -->
+    <script src="../../static/search/js/isotope.min.js"></script>
+    <script src="../../static/search/js/isotope-filter.js"></script>
+    <!-- / Isotope -->
 
     <footer class="bg-white">
         <div class="container">
