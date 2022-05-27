@@ -76,7 +76,16 @@
                         <!-- paragraphs -->
                         <p class="lead mt-10">{{ meta.case_id }}</p>
                         {% for sentence in content.body %}
-                            <p class="lead mt-10">{{ sentence }}</p>
+                            <p class="mt-10">{{ sentence }}</p>
+                        {% endfor %}
+                        {% for name in content.judge %}
+                            <p class="lead" style="text-align: end">{{ name }}</p>
+                        {% endfor %}
+                        <p></p>
+                        <p class="lead" style="text-align: end">{{ content.time }}</p>
+                        <p></p>
+                        {% for name in content.secretaryn %}
+                            <p class="lead" style="text-align: end">{{ name }}</p>
                         {% endfor %}
                         <p>Regular Paragraph.</p>
                         <p>
@@ -88,22 +97,6 @@
                             <span class="primary-font mr-5">.primary-font</span>
                             <span class="secondary-font mr-5">.secondary-font</span>
                         </p>
-
-                        <p>
-                            <span class="text-primary mr-5">.text-primary</span>
-                            <span class="text-secondary mr-5">.text-secondary</span>
-                            <span class="text-success mr-5">.text-success</span>
-                            <span class="text-info mr-5">.text-info</span>
-                            <span class="text-warning mr-5">.text-warning</span>
-                            <span class="text-danger mr-5">.text-danger</span>
-                        </p>
-                        <p class="lead mt-15 mb-15">Blockquotes</p>
-                        <blockquote class="blockquote">
-                            <div class="blockquote-content">
-                                <p class="mb-0">Default Blockquote.</p>
-                                <footer class="blockquote-footer">Jacob Ginnish <cite title="Source Title">CEO @ A Company</cite></footer>
-                            </div><!--/ blockquote-content -->
-                        </blockquote>
                         <!-- / paragraphs -->
                     </div><!-- / row -->
                 </div><!-- / promo-box -->
