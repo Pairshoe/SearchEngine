@@ -47,19 +47,89 @@
                             <a class="nav-link active" href="headers.html#x"><span><i class="fas fa-home mr-5"></i> Home</span></a>
                         </li><!-- / nav-item -->
                         <li class="nav-item">
-                            <a class="nav-link last-menu-item" href="headers.html#x"><span><i class="fas fa-th-large mr-5"></i> Advanced search</span></a>
+                            <a class="nav-link" onclick="showAdvancedSearch()"><span><i class="fas fa-th-large mr-5"></i> Advanced search</span></a>
                         </li><!-- / nav-item -->
                         <li class="nav-item">
-                            <a class="nav-link" href="headers.html#x"><span><i class="fas fa-pencil-ruler mr-5"></i> Upload case</span></a>
+                            <a class="nav-link" onclick="showUploadCase()"><span><i class="fas fa-pencil-ruler mr-5"></i> Upload case</span></a>
                         </li><!-- / nav-item -->
                         <li class="nav-item">
-                            <a class="nav-link" href="headers.html#x"><span><i class="fas fa-user mr-5"></i> About</span></a>
+                            <a class="nav-link last-menu-item" href="headers.html#x"><span><i class="fas fa-user mr-5"></i> About</span></a>
                         </li><!-- / nav-item -->
                     </ul><!-- / navbar-nav -->
                 </div><!-- / navbar-collapse -->
             </div><!-- / container -->
         </nav><!-- / navbar -->
     </div><!-- / relative -->
+
+    <!-- Advanced search -->
+    <div id="advancedSearch" class="widget position-absolute top-100 left-200 right-200" style="display: none; z-index: 99">
+        <div class="toast-header mb-25">
+            <strong class="me-auto">Advanced search</strong>
+            <button type="button" class="btn-close" onclick="hideAdvancedSearch()"></button>
+        </div><!-- / toast-header -->
+        <form action="result" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="keyword" placeholder="Keyword" required="">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="case_id" placeholder="Case ID">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="email" class="form-control" name="filing_time" placeholder="Filing Time">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="law" placeholder="Law">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="law_detailed" placeholder="Law Detailed">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="crime" placeholder="Crime">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="judge" placeholder="Judge">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="court" placeholder="Court">
+            </div><!-- / form-group -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="document_type" placeholder="Document Type">
+            </div><!-- / form-group -->
+            <button type="submit" class="btn btn-primary btn-submit">Search</button>
+        </form><!-- / form-group -->
+    </div>
+    <script>
+        function showAdvancedSearch() {
+            document.getElementById('advancedSearch').style.display = 'block';
+        }
+        function hideAdvancedSearch() {
+            document.getElementById('advancedSearch').style.display = 'none';
+        }
+    </script>
+    <!-- / Advanced search -->
+
+    <!-- Advanced search -->
+    <div id="uploadCase" class="widget position-absolute top-200 left-200 right-200" style="display: none; z-index: 99">
+        <div class="toast-header mb-25">
+            <strong class="me-auto">Upload case</strong>
+            <button type="button" class="btn-close" onclick="hideUploadCase()"></button>
+        </div><!-- / toast-header -->
+        <form action="result" method="GET">
+            <div class="form-group">
+                <textarea class="form-control" name="case_content" rows="5" placeholder="Case Content" required=""></textarea>
+            </div><!-- / form-group -->
+            <button type="submit" class="btn btn-primary btn-submit">Upload</button>
+        </form><!-- / form-group -->
+    </div>
+    <script>
+        function showUploadCase() {
+            document.getElementById('uploadCase').style.display = 'block';
+        }
+        function hideUploadCase() {
+            document.getElementById('uploadCase').style.display = 'none';
+        }
+    </script>
+    <!-- / Advanced search -->
 
     <header class="p-y-0 full-height bg-img img-left" style="background-image: url(../../static/search/images/ph-bg2.jpg)">
         <div class="overlay-half-light tablet-full right-0 left-auto"></div>
@@ -75,7 +145,7 @@
                             <p class="d-block lead mb-30 w-60" data-aos="fade-up">Pellentesque libero nisl, aliquet quis libero et, posuere consectetur diam metus.</p>
                             <form action="result" method="GET">
                                 <div class="input-group input-w-overlap-btn mb-0">
-                                    <input type="text" name="query" class="form-control pill" placeholder="Search...">
+                                    <input type="text" name="query" class="form-control pill" placeholder="Search..." required="">
                                     <span class="input-group-btn">
                                         <button class="btn btn-sm btn-primary btn-icon overlapping-btn btn-circle" type="submit">
                                             <i class="fas fa-search"></i>

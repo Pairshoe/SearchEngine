@@ -9,7 +9,8 @@ class SearchEngineCore:
 
     def __init__(self):
         self.es = Elasticsearch('http://localhost:9200')
-        self.condition_list = ['case_id', 'filing_time', 'law', 'law_detailed', 'crime', 'judge', 'court', 'document_type', 'browse_count']
+        self.condition_list = ['case_id', 'filing_time', 'law', 'law_detailed', 'crime', 'judge', 'court',
+                               'document_type', 'browse_count']
         self.query = {'bool': {'must': [], 'should': []}}
         self.sort = None
         self.can_search = False
@@ -18,8 +19,9 @@ class SearchEngineCore:
     # accurate_mode ：精确模式，若开启该模式，将依照空格对搜索词进行分隔并分别精确匹配
     # conditions ：其他搜索条件，包括 condition_list 中列到的所有内容，注意 filing_time 和 browse_count 均为 int 类型，其余为 str
     # sort_key ：排序依据，置空即按照分数排序（默认），还可以选择 filing_time 或 browse_count
-    def make_query(self, content: str, accurate_mode: bool=False, case_mode: bool=False, conditions: dict=dict(), sort_key: str=''):
-        assert(sort_key == '' or sort_key == 'filing_time' or sort_key == 'browse_count')
+    def make_query(self, content: str, accurate_mode: bool = False, case_mode: bool = False, conditions: dict = dict(),
+                   sort_key: str = ''):
+        assert (sort_key == '' or sort_key == 'filing_time' or sort_key == 'browse_count')
         self.query = {'bool': {'must': [], 'should': []}}
         self.sort = dict()
         content = re.sub(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$', ' ', content)
@@ -55,16 +57,18 @@ class SearchEngineCore:
             result = {'id': term['_id']}
             for condition in self.condition_list:
                 result[condition] = term['_source'][condition]
-            result['content_abstract'] = (term['_source']['content'][:300] + '...') if len(term['_source']['content']) > 300 else term['_source']['content']
+            result['content_abstract'] = (term['_source']['content'][:300] + '...') if len(
+                term['_source']['content']) > 300 else term['_source']['content']
             recommends.append(result)
         return recommends
 
     # page ：页号
     def search_case(self, page: int):
-        assert(self.can_search == True)
+        assert (self.can_search is True)
         results = list()
 
-        response = self.es.search(index=INDEX, from_=page*10, size=10, highlight={'fields': {'content': {}}}, query=self.query, sort=self.sort)
+        response = self.es.search(index=INDEX, from_=page * 10, size=10, highlight={'fields': {'content': {}}},
+                                  query=self.query, sort=self.sort)
         for term in response['hits']['hits']:
             result = {'id': term['_id']}
             for condition in self.condition_list:
@@ -91,10 +95,15 @@ class SearchEngineCore:
         while counter < len(content_raw) and re.search(r'：.*。', content_raw[counter]) is not None:
             content['header'].append(content_raw[counter])
             counter += 1
-        while counter < len(content_raw) and (re.search(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$', content_raw[counter]) is not None or re.search(r'(审判|陪审)', content_raw[counter]) is None):
+        while counter < len(content_raw) and (
+                re.search(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$', content_raw[counter]) is not None or re.search(
+            r'(审判|陪审)', content_raw[counter]) is None):
             content['body'].append(content_raw[counter])
             counter += 1
-        while counter < len(content_raw) and re.search(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$', content_raw[counter]) is None and re.search(r'(审判|陪审)', content_raw[counter]) is not None:
+        while counter < len(content_raw) and re.search(r'[。？！，、；：“”\(\)\{\}\[\]<>（）〔〕【】〖〗《》\-~—…]$',
+                                                       content_raw[counter]) is None and re.search(r'(审判|陪审)',
+                                                                                                   content_raw[
+                                                                                                       counter]) is not None:
             content['judge'].append(content_raw[counter])
             counter += 1
         if counter < len(content_raw) and re.search(r'年.*月.*日.*', content_raw[counter]) is not None:
@@ -108,7 +117,8 @@ class SearchEngineCore:
             counter += 1
 
         recommends = list()
-        recommend_response = self.es.search(index=INDEX, size=5, query={'match': {'content': (case_detail['content'][:5000] if len(case_detail['content']) > 5000 else case_detail['content'])}})
+        recommend_response = self.es.search(index=INDEX, size=5, query={'match': {'content': (
+            case_detail['content'][:5000] if len(case_detail['content']) > 5000 else case_detail['content'])}})
         recommends = self.parse_recommend_response(recommend_response['hits']['hits'])
 
         query = {'bool': {'must': []}}
@@ -124,7 +134,8 @@ class SearchEngineCore:
         recommends_law = self.parse_recommend_response(recommend_law_response['hits']['hits'])
 
         case_detail.pop('content')
-        return {'title': title, 'meta': case_detail, 'content': content, 'recommends': recommends, 'recommends_judge': recommends_judge, 'recommends_law': recommends_law}
+        return {'title': title, 'meta': case_detail, 'content': content, 'recommends': recommends,
+                'recommends_judge': recommends_judge, 'recommends_law': recommends_law}
 
 
 if __name__ == '__main__':
