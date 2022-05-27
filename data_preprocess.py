@@ -1,4 +1,6 @@
-import re, os
+import os
+import re
+
 from bs4 import BeautifulSoup
 from elasticsearch import Elasticsearch
 
@@ -73,5 +75,3 @@ if __name__ == '__main__':
                 print(f'Adding: {i + 1} / {len(files)}')
             # if (i + 1) % 1000 == 0:
             #     break
-
-    es.indices.refresh(index=INDEX)

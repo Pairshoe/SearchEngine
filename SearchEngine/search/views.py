@@ -19,15 +19,17 @@ def search(request):
     if request.method == 'GET':
         searchEngineCore.make_query(request.GET.get('query'))
         results, recommands = searchEngineCore.search_case(0)
+        print(results[0])
         for result in results:
             result['highlight'] = ''.join(result['highlight'])
-        content["results"] = results
+        content['results'] = results
     return HttpResponse(template.render(content, request))
 
 
 def detail(request):
-    return render(request, 'search/detail.html')
-
-
-def test(request):
-    return render(request, 'search/test.html')
+    template = loader.get_template('search/detail.html')
+    if request.method == 'GET':
+        print(request.GET.get('id'))
+        results = searchEngineCore.get_case(request.GET.get('id'))
+        print(results)
+    return HttpResponse(template.render(results, request))

@@ -64,40 +64,47 @@
         <section id="base">
             <div class="container">
                 <div class="promo-box" data-aos="fade-up">
-                    <h1>案例标题</h1>
+                    <h3>{{ title }}</h3>
+                        <div class="tag-cloud">
+                            <a class="btn btn-xs btn-primary m-5 ml-0">{{ meta.filing_time }}</a>
+                            <a class="btn btn-xs btn-linkedin m-5 ml-0">{{ meta.document_type }}</a>
+                            <a class="btn btn-xs btn-warning m-5 ml-0">{{ meta.court }}</a>
+                            <a class="btn btn-xs btn-info m-5 ml-0">{{ meta.judge }}</a>
+                            <a class="btn btn-xs btn-success m-5 ml-0">{{ meta.law }}</a>
+                        </div>
                     <div class="row">
-
                         <!-- paragraphs -->
-                            <p class="lead mb-20">2022/05/17</p>
-                            <p class="lead">Large Paragraph (lead).</p>
-                            <p>Regular Paragraph.</p>
-                            <p>
-                                <span class="fw-thin mr-5">.fw-thin</span>
-                                <span class="fw-light mr-5">.fw-light</span>
-                                <span class="fw-regular mr-5">.fw-regular</span>
-                                <span class="fw-medium mr-5">.fw-medium</span>
-                                <span class="fw-bold mr-5">.fw-bold</span>
-                                <span class="primary-font mr-5">.primary-font</span>
-                                <span class="secondary-font mr-5">.secondary-font</span>
-                            </p>
+                        <p class="lead mt-10">{{ meta.case_id }}</p>
+                        {% for sentence in content.body %}
+                            <p class="lead mt-10">{{ sentence }}</p>
+                        {% endfor %}
+                        <p>Regular Paragraph.</p>
+                        <p>
+                            <span class="fw-thin mr-5">.fw-thin</span>
+                            <span class="fw-light mr-5">.fw-light</span>
+                            <span class="fw-regular mr-5">.fw-regular</span>
+                            <span class="fw-medium mr-5">.fw-medium</span>
+                            <span class="fw-bold mr-5">.fw-bold</span>
+                            <span class="primary-font mr-5">.primary-font</span>
+                            <span class="secondary-font mr-5">.secondary-font</span>
+                        </p>
 
-                            <p>
-                                <span class="text-primary mr-5">.text-primary</span>
-                                <span class="text-secondary mr-5">.text-secondary</span>
-                                <span class="text-success mr-5">.text-success</span>
-                                <span class="text-info mr-5">.text-info</span>
-                                <span class="text-warning mr-5">.text-warning</span>
-                                <span class="text-danger mr-5">.text-danger</span>
-                            </p>
-                            <p class="lead mt-15 mb-15">Blockquotes</p>
-                            <blockquote class="blockquote">
-                                <div class="blockquote-content">
-                                    <p class="mb-0">Default Blockquote.</p>
-                                    <footer class="blockquote-footer">Jacob Ginnish <cite title="Source Title">CEO @ A Company</cite></footer>
-                                </div><!--/ blockquote-content -->
-                            </blockquote>
+                        <p>
+                            <span class="text-primary mr-5">.text-primary</span>
+                            <span class="text-secondary mr-5">.text-secondary</span>
+                            <span class="text-success mr-5">.text-success</span>
+                            <span class="text-info mr-5">.text-info</span>
+                            <span class="text-warning mr-5">.text-warning</span>
+                            <span class="text-danger mr-5">.text-danger</span>
+                        </p>
+                        <p class="lead mt-15 mb-15">Blockquotes</p>
+                        <blockquote class="blockquote">
+                            <div class="blockquote-content">
+                                <p class="mb-0">Default Blockquote.</p>
+                                <footer class="blockquote-footer">Jacob Ginnish <cite title="Source Title">CEO @ A Company</cite></footer>
+                            </div><!--/ blockquote-content -->
+                        </blockquote>
                         <!-- / paragraphs -->
-
                     </div><!-- / row -->
                 </div><!-- / promo-box -->
             </div>

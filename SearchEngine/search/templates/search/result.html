@@ -65,7 +65,7 @@
     {% if results %}
     <div class="container">
         {% for result in results %}
-        <a href="{%url 'detail' %}">
+        <a href="{%url 'detail' %}?id={{ result.id }}">
             <div class="promo-box promo-left" data-aos="fade-up">
                 <div class="promo-container">
                     <i class="bi bi-bootstrap promo-icon d-block mb-25 text-primary"></i>
