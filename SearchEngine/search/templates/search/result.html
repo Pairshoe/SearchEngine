@@ -62,34 +62,26 @@
       </nav><!-- / navbar -->
     </div>
 
+    {% if results %}
     <div class="container">
+        {% for result in results %}
         <a href="{%url 'detail' %}">
             <div class="promo-box promo-left" data-aos="fade-up">
                 <div class="promo-container">
                     <i class="bi bi-bootstrap promo-icon d-block mb-25 text-primary"></i>
-                    <h6 class="box-title mb-15">Case Name 1</h6>
-                    <p class="box-description">Suspendisse tempus ante nulla, quis dignissim nisi maximus pulvinar. Nunc in posuere justo. Fusce dictum vulputate.</p>
+                    <h6 class="box-title mb-15">{{ result.case_id }}</h6>
+                    <p className="box-description" id="{{ result.case_id }}"></p>
+                    <script>
+                        highlight = '{{ result.highlight }}'
+                        highlight = highlight.replace('[', '').replace(']', '')
+                            .replaceAll('&lt;em&gt;', '<span class="text-primary">').replaceAll('&lt;/em&gt;', '</span>')
+                        console.log(highlight)
+                        document.getElementById('{{ result.case_id }}').innerHTML = highlight
+                    </script>
                 </div><!-- / promo-container -->
             </div><!-- / promo-box -->
         </a>
-        <a href="{%url 'detail' %}">
-          <div class="promo-box promo-left" data-aos="fade-up">
-              <div class="promo-container">
-                  <i class="bi bi-bootstrap promo-icon d-block mb-25 text-primary"></i>
-                  <h6 class="box-title mb-15">Case Name 2</h6>
-                  <p class="box-description" href="detail">Suspendisse tempus ante nulla, quis dignissim nisi maximus pulvinar. Nunc in posuere justo. Fusce dictum vulputate.</p>
-              </div><!-- / promo-container -->
-          </div><!-- / promo-box -->
-        </a>
-        <a href="{%url 'detail' %}">
-            <div class="promo-box promo-left" data-aos="fade-up">
-                <div class="promo-container">
-                    <i class="bi bi-bootstrap promo-icon d-block mb-25 text-primary"></i>
-                    <h6 class="box-title mb-15">Case Name 3</h6>
-                    <p class="box-description">Suspendisse tempus ante nulla, quis dignissim nisi maximus pulvinar. Nunc in posuere justo. Fusce dictum vulputate.</p>
-                </div><!-- / promo-container -->
-            </div><!-- / promo-box -->
-        </a>
+        {% endfor %}
         <nav aria-label="pagination-center" data-aos="fade-up">
             <ul class="pagination pill-pagination justify-content-center">
                 <li class="page-item disabled"><a class="page-link" href="blog.html#x"><i class="fas fa-chevron-left mb-5"></i></a></li>
@@ -104,6 +96,9 @@
             </ul>
         </nav><!-- / pagination-center -->
     </div><!-- / container -->
+    {% else %}
+        <p>No results</p>
+    {% endif %}
 
     <!-- Core JavaScript -->
     <script src="../../static/search/js/bootstrap.bundle.min.js"></script>

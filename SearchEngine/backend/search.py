@@ -1,7 +1,9 @@
-import re, time
+import re
+import time
+
 from elasticsearch import Elasticsearch
 
-INDEX = 'cases_test'
+INDEX = 'test_cases'
 
 
 class SearchEngineCore:
