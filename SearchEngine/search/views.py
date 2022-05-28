@@ -30,9 +30,9 @@ def search(request):
                 'court': request.GET.get('court'),
                 'document_type': request.GET.get('document_type'),
             }
-            searchEngineCore.make_query(request.GET.get('keyword'), conditions=condition_list)
+            searchEngineCore.make_query(request.GET.get('keyword'), conditions=condition_list, accurate_mode=True)
         else:
-            searchEngineCore.make_query(request.GET.get('case_content'))
+            searchEngineCore.make_query(request.GET.get('case_content'), case_mode=True)
         results = searchEngineCore.search_case(0)
         for result in results:
             result['highlight'] = ''.join(result['highlight'])
