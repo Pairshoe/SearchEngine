@@ -63,11 +63,12 @@ class SearchEngineCore:
         return recommends
 
     # page ：页号
+    # 返回结果、页码起始值和页码终止值
     def search_case(self, page: int):
         assert (self.can_search is True)
         results = list()
 
-        response = self.es.search(index=INDEX, from_=page * 10, size=10, highlight={'fields': {'content': {}}},
+        response = self.es.search(index=INDEX, from_=(page - 1) * 10, size=10, highlight={'fields': {'content': {}}},
                                   query=self.query, sort=self.sort)
         for term in response['hits']['hits']:
             result = {'id': term['_id']}
@@ -76,7 +77,15 @@ class SearchEngineCore:
             result['highlight'] = term['highlight']['content']
             results.append(result)
 
-        return results
+        max_page = page
+        while max_page < 5 or max_page < page + 2:
+            if len(self.es.search(index=INDEX, from_=max_page * 10, size=10, highlight={'fields': {'content': {}}},
+                                  query=self.query, sort=self.sort)['hits']['hits']) > 0:
+                max_page += 1
+            else:
+                break
+
+        return results, range(max(max_page - 4, 1), max_page + 1)
 
     # id ：案件编号
     def get_case(self, id: str):

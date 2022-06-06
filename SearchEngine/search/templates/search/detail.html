@@ -33,7 +33,7 @@
         <div class="relative" style="margin-bottom: 5%">
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent absolute top-0 left-0 right-0">
                 <div class="container">
-                    <a class="navbar-brand" href="/"><img src="../../static/search/images/logo4.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img src="../../static/search/images/logo0.png" alt="" style="max-width: 320px; max-height: 64px"></a>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-7" aria-controls="navbar-7" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar top-bar"></span>
                         <span class="icon-bar middle-bar"></span>
@@ -66,11 +66,21 @@
                 <div class="promo-box" data-aos="fade-up">
                     <h3>{{ title }}</h3>
                         <div class="tag-cloud">
-                            <a class="btn btn-xs btn-primary m-5 ml-0">{{ meta.filing_time }}</a>
-                            <a class="btn btn-xs btn-linkedin m-5 ml-0">{{ meta.document_type }}</a>
-                            <a class="btn btn-xs btn-warning m-5 ml-0">{{ meta.court }}</a>
-                            <a class="btn btn-xs btn-info m-5 ml-0">{{ meta.judge }}</a>
-                            <a class="btn btn-xs btn-success m-5 ml-0">{{ meta.law }}</a>
+                            {% if meta.filing_time != 0 %}
+                                <a class="btn btn-xs btn-primary m-5 ml-0">{{ meta.filing_time }}</a>
+                            {% endif %}
+                            {% if meta.document_type %}
+                                <a class="btn btn-xs btn-linkedin m-5 ml-0">{{ meta.document_type }}</a>
+                            {% endif %}
+                            {% if meta.court %}
+                                <a class="btn btn-xs btn-warning m-5 ml-0">{{ meta.court }}</a>
+                            {% endif %}
+                            {% if meta.judge %}
+                                <a class="btn btn-xs btn-info m-5 ml-0">{{ meta.judge }}</a>
+                            {% endif %}
+                            {% if meta.law %}
+                                <a class="btn btn-xs btn-success m-5 ml-0">{{ meta.law }}</a>
+                            {% endif %}
                         </div>
                     <div class="row">
                         <!-- paragraphs -->
@@ -98,8 +108,7 @@
         <div class="container">
             <div class="button-group filters-button-group mb-70">
                 <span class="fs-14 fw-medium title-color mr-20 mb-0">Recommends:</span>
-                <button class="btn filter-btn is-checked" data-filter="*">All</button>
-                <button class="btn filter-btn" data-filter=".similar_content">Similar Content</button>
+                <button class="btn filter-btn is-checked" data-filter=".similar_content">Similar Content</button>
                 <button class="btn filter-btn" data-filter=".similar_judge">Similar Judge</button>
                 <button class="btn filter-btn" data-filter=".similar_law">Similar Law</button>
             </div><!-- /  filters-button-group -->
