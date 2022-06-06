@@ -152,7 +152,17 @@ def get_case(self, id: str)
 
 
 
-## 5. 参考资料
+##5. 分工
+
+王拓为：前端页面实现，前后端对接
+
+罗富文：后端搜索框架实现，数据处理
+
+
+
+
+
+## 6. 参考资料
 
  - Elastic Search 简体中文教程： https://www.elastic.co/guide/cn/index.html ；
  - Python Elastic Search 文档： https://elasticsearch-py.readthedocs.io/en/v8.2.2/ ；
