@@ -82,16 +82,40 @@
                     </li>
                     <li class="nav-item">
                         {% if sort_key == 'filing_time' %}
-                            <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% if query %}
+                                <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% elif keyword %}
+                                <a class="nav-link active" href="?query={{ keyword }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% else %}
+                                <a class="nav-link active" href="?query={{ case_content }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% endif %}
                         {% else %}
-                            <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% if query %}
+                                <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% elif keyword %}
+                                <a class="nav-link" href="?query={{ keyword }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% else %}
+                                <a class="nav-link" href="?query={{ case_content }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                            {% endif %}
                         {% endif %}
                     </li>
                     <li class="nav-item">
                         {% if sort_key == 'browse_count' %}
-                            <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% if query %}
+                                <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% elif keyword %}
+                                <a class="nav-link active" href="?query={{ keyword }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% else %}
+                                <a class="nav-link active" href="?query={{ case_content }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% endif %}
                         {% else %}
-                            <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% if query %}
+                                <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% elif keyword %}
+                                <a class="nav-link" href="?query={{ keyword }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% else %}
+                                <a class="nav-link" href="?query={{ case_content }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                            {% endif %}
                         {% endif %}
                     </li>
                 </ul><!-- / navbar-nav -->
