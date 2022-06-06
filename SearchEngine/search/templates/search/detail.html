@@ -40,23 +40,6 @@
                         <span class="icon-bar bottom-bar"></span>
                         <span class="sr-only">Toggle navigation</span>
                     </button><!-- / navbar-toggler -->
-
-                    <div class="collapse navbar-collapse" id="navbar-7">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="headers.html#x"><span><i class="fas fa-home mr-5"></i> Home</span></a>
-                            </li><!-- / nav-item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="headers.html#x"><span><i class="fas fa-user mr-5"></i> About</span></a>
-                            </li><!-- / nav-item -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="headers.html#x"><span><i class="fas fa-pencil-ruler mr-5"></i> Services</span></a>
-                            </li><!-- / nav-item -->
-                            <li class="nav-item">
-                                <a class="nav-link last-menu-item" href="headers.html#x"><span><i class="fas fa-th-large mr-5"></i> Portfolio</span></a>
-                            </li><!-- / nav-item -->
-                        </ul><!-- / navbar-nav -->
-                    </div><!-- / navbar-collapse -->
                 </div><!-- / container -->
             </nav><!-- / navbar -->
         </div><!-- / relative -->
@@ -65,23 +48,23 @@
             <div class="container">
                 <div class="promo-box" data-aos="fade-up">
                     <h3>{{ title }}</h3>
-                        <div class="tag-cloud">
-                            {% if meta.filing_time != 0 %}
-                                <a class="btn btn-xs btn-primary m-5 ml-0">{{ meta.filing_time }}</a>
-                            {% endif %}
-                            {% if meta.document_type %}
-                                <a class="btn btn-xs btn-linkedin m-5 ml-0">{{ meta.document_type }}</a>
-                            {% endif %}
-                            {% if meta.court %}
-                                <a class="btn btn-xs btn-warning m-5 ml-0">{{ meta.court }}</a>
-                            {% endif %}
-                            {% if meta.judge %}
-                                <a class="btn btn-xs btn-info m-5 ml-0">{{ meta.judge }}</a>
-                            {% endif %}
-                            {% if meta.law %}
-                                <a class="btn btn-xs btn-success m-5 ml-0">{{ meta.law }}</a>
-                            {% endif %}
-                        </div>
+                    <div class="tag-cloud">
+                        {% if meta.filing_time != 0 %}
+                            <a class="btn btn-xs btn-primary m-5 ml-0">{{ meta.filing_time }}</a>
+                        {% endif %}
+                        {% if meta.document_type %}
+                            <a class="btn btn-xs btn-linkedin m-5 ml-0">{{ meta.document_type }}</a>
+                        {% endif %}
+                        {% if meta.court %}
+                            <a class="btn btn-xs btn-warning m-5 ml-0">{{ meta.court }}</a>
+                        {% endif %}
+                        {% if meta.judge %}
+                            <a class="btn btn-xs btn-info m-5 ml-0">{{ meta.judge }}</a>
+                        {% endif %}
+                        {% if meta.law %}
+                            <a class="btn btn-xs btn-success m-5 ml-0">{{ meta.law }}</a>
+                        {% endif %}
+                    </div>
                     <div class="row">
                         <!-- paragraphs -->
                         <p class="lead mt-10">{{ meta.case_id }}</p>
@@ -183,13 +166,13 @@
         <div class="container">
             <div class="row v-center mobile-center">
                 <div class="col-md-4 footer-left-area tablet-top">
-                    <p>© 2022 WikiLaw by Firman Luo & Victor Wang</a></p>
+                    <p>© 2022 WikiLaw by Victor Wang & Firman Luo</a></p>
                 </div><!-- / footer-left-area -->
                <div class="col-md-8 footer-right-area">
                     <p class="footer-social">
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-facebook-f"></i></a>
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-twitter"></i></a>
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary"><i class="fab fa-facebook-f"></i></a>
                     </p><!-- / footer-social -->
                 </div><!-- / footer-right-area -->
             </div><!-- / row -->

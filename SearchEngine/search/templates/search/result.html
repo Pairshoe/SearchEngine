@@ -74,16 +74,25 @@
                 </form>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="navigations.html#x"> Total</a>
+                        {% if sort_key == '' %}
+                            <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}"> Accuracy</a>
+                        {% else %}
+                            <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}"> Accuracy</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="navigations.html#x"> Time</a>
+                        {% if sort_key == 'filing_time' %}
+                            <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                        {% else %}
+                            <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=filing_time"> Time</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="navigations.html#x"> Hot</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="navigations.html#x">More</a>
+                        {% if sort_key == 'browse_count' %}
+                            <a class="nav-link active" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                        {% else %}
+                            <a class="nav-link" href="?query={{ query }}&current_page={{ current_page }}&sort_key=browse_count"> Hot</a>
+                        {% endif %}
                     </li>
                 </ul><!-- / navbar-nav -->
             </div><!-- / container -->
@@ -215,7 +224,7 @@
         </nav><!-- / pagination-center -->
     </div><!-- / container -->
     {% else %}
-        <p>No results</p>
+        <p class="text-center lead m-10">Sorry, no results.</p>
     {% endif %}
 
     <!-- Core JavaScript -->
@@ -240,13 +249,13 @@
         <div class="container">
             <div class="row v-center mobile-center">
                 <div class="col-md-4 footer-left-area tablet-top">
-                    <p>© 2022 Wiki Law by Firman Luo & Victor Wang</a></p>
+                    <p>© 2022 Wiki Law by Victor Wang & Firman Luo</a></p>
                 </div><!-- / footer-left-area -->
                <div class="col-md-8 footer-right-area">
                     <p class="footer-social">
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-github"></i></a>
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-twitter"></i></a>
-                        <a href="post.html#x" class="btn btn-xs btn-icon btn-circle btn-primary"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary mr-10"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-xs btn-icon btn-circle btn-primary"><i class="fab fa-facebook-f"></i></a>
                     </p><!-- / footer-social -->
                 </div><!-- / footer-right-area -->
             </div><!-- / row -->
