@@ -79,9 +79,9 @@ def get_case(self, id: str)
 
 * 关于页 `localhost:8000/about/`
 
-  展示网站相关信息。
+  展示网站及开发者相关信息。
 
-  
+  ![截屏2022-06-06 22.27.04](https://img.wzf2000.top/image/2022/06/06/2022-06-06-22.27.04.png)
 
 
 
