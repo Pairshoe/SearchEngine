@@ -40,7 +40,7 @@ def search(request):
                                         sort_key=sort_key)
             content['keyword'] = request.GET.get('keyword')
         else:
-            searchEngineCore.make_query(request.GET.get('case_content'), sort_key=sort_key)
+            searchEngineCore.make_query(request.GET.get('case_content'), sort_key=sort_key, case_mode=True)
             content['case_content'] = request.GET.get('case_content')
         if request.GET.get('current_page') is not None:
             current_page = int(request.GET.get('current_page'))
@@ -63,6 +63,8 @@ def detail(request):
     template = loader.get_template('search/detail.html')
     if request.method == 'GET':
         results = searchEngineCore.get_case(request.GET.get('id'))
+        if 100 < len(results['meta']['law']):
+            results['meta']['law'] = results['meta']['law'][:100] + '...'
     return HttpResponse(template.render(results, request))
 
 
