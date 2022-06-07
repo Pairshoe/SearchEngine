@@ -91,13 +91,14 @@
         <div class="container">
             <div class="button-group filters-button-group mb-70">
                 <span class="fs-14 fw-medium title-color mr-20 mb-0">Recommends:</span>
-                <button class="btn filter-btn is-checked" data-filter=".similar_content">Similar Content</button>
+                <button class="btn filter-btn is-checked">All</button>
+                <button class="btn filter-btn" data-filter=".similar_content">Similar Content</button>
                 <button class="btn filter-btn" data-filter=".similar_judge">Similar Judge</button>
                 <button class="btn filter-btn" data-filter=".similar_law">Similar Law</button>
             </div><!-- /  filters-button-group -->
 
             <div class="row grid" data-isotope='{ "layoutMode": "masonry" }'>
-                <!-- similar judge -->
+                <!-- similar content -->
                 {% for recommend in recommends %}
                 <div class="col-md-6 col-lg-4 grid-item similar_content">
                     <a href="{%url 'detail' %}?id={{ recommend.id }}">
@@ -110,7 +111,7 @@
                     </a>
                 </div><!-- / column -->
                 {% endfor %}
-                <!-- /  similar judge -->
+                <!-- /  similar content -->
                 <!-- similar judge -->
                 {% for recommend in recommends_judge %}
                 <div class="col-md-6 col-lg-4 grid-item similar_judge">

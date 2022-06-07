@@ -39,9 +39,18 @@ def search(request):
             searchEngineCore.make_query(request.GET.get('keyword'), conditions=condition_list, accurate_mode=True,
                                         sort_key=sort_key)
             content['keyword'] = request.GET.get('keyword')
+            content['case_id'] = request.GET.get('case_id')
+            content['filing_time'] = request.GET.get('filing_time')
+            content['law'] = request.GET.get('law')
+            content['law_detailed'] = request.GET.get('law_detailed')
+            content['crime'] = request.GET.get('crime')
+            content['judge'] = request.GET.get('judge')
+            content['court'] = request.GET.get('court')
+            content['document_type'] = request.GET.get('document_type')
         else:
             searchEngineCore.make_query(request.GET.get('case_content'), sort_key=sort_key, case_mode=True)
             content['case_content'] = request.GET.get('case_content')
+
         if request.GET.get('current_page') is not None:
             current_page = int(request.GET.get('current_page'))
             results = searchEngineCore.search_case(current_page)

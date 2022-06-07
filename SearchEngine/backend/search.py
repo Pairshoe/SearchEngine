@@ -2,7 +2,17 @@ import re, jieba
 from elasticsearch import Elasticsearch
 
 TEST = False
-INDEX = 'cases_test' if TEST == True else 'cases'
+INDEX = 'cases_test' if TEST is True else 'cases'
+
+
+def remove_self(recommends, id):
+    for i in range(len(recommends)):
+        if recommends[i]['id'] == id:
+            recommends.pop(i)
+            break
+    if len(recommends) > 5:
+        recommends.pop(-1)
+    return recommends
 
 
 class SearchEngineCore:
@@ -21,6 +31,7 @@ class SearchEngineCore:
     # sort_key ：排序依据，置空即按照分数排序（默认），还可以选择 filing_time 或 browse_count
     def make_query(self, content: str, accurate_mode: bool = False, case_mode: bool = False, conditions: dict = dict(),
                    sort_key: str = ''):
+        content = re.sub(r'\s', '', content)
         assert (sort_key == '' or sort_key == 'filing_time' or sort_key == 'browse_count')
         self.query = {'bool': {'must': [], 'should': []}}
         self.sort = dict()
@@ -29,9 +40,11 @@ class SearchEngineCore:
             for word in content.split():
                 self.query['bool']['must'].append({'match_phrase': {'content': word}})
         elif case_mode == True:
+            if len(content) > 1000:
+                content = content[:1000]
             for word in jieba.cut(content, cut_all=True):
                 self.query['bool']['should'].append({'match_phrase': {'content': word}})
-            self.query['bool']['minimum_should_match'] = '60%'
+            self.query['bool']['minimum_should_match'] = '70%'
         else:
             for word in jieba.cut_for_search(content):
                 self.query['bool']['should'].append({'match_phrase': {'content': word}})
@@ -125,22 +138,24 @@ class SearchEngineCore:
             content['laws'].append(content_raw[counter])
             counter += 1
 
-        recommends = list()
-        recommend_response = self.es.search(index=INDEX, size=5, query={'match': {'content': (
+        recommend_response = self.es.search(index=INDEX, size=6, query={'match': {'content': (
             case_detail['content'][:5000] if len(case_detail['content']) > 5000 else case_detail['content'])}})
         recommends = self.parse_recommend_response(recommend_response['hits']['hits'])
+        recommends = remove_self(recommends, id)
 
-        query = {'bool': {'must': []}}
+        query = {'bool': {'should': []}}
         for word in case_detail['judge'].split():
-            query['bool']['must'].append({'match_phrase': {'judge': word}})
+            query['bool']['should'].append({'match_phrase': {'judge': word}})
         recommend_judge_response = self.es.search(index=INDEX, size=5, query=query)
         recommends_judge = self.parse_recommend_response(recommend_judge_response['hits']['hits'])
+        recommends_judge = remove_self(recommends_judge, id)
 
-        query = {'bool': {'must': []}}
+        query = {'bool': {'should': []}}
         for word in case_detail['law'].split():
-            query['bool']['must'].append({'match_phrase': {'law': word}})
+            query['bool']['should'].append({'match_phrase': {'law': word}})
         recommend_law_response = self.es.search(index=INDEX, size=5, query=query)
         recommends_law = self.parse_recommend_response(recommend_law_response['hits']['hits'])
+        recommends_law = remove_self(recommends_law, id)
 
         case_detail.pop('content')
         return {'title': title, 'meta': case_detail, 'content': content, 'recommends': recommends,
@@ -151,4 +166,4 @@ if __name__ == '__main__':
     core = SearchEngineCore()
     core.make_query('中华人民共和国刑法', accurate_mode=False)
     print(core.search_case(0))
-    print(core.get_case(1))
+    print(core.get_case('1'))
